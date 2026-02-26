@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:17
+    env_file:
+      - .env.docker
+    ports:
+      - "5431:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      retries: 10
+
+  card-management-service:
+    env_file:
+      - .env.docker
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres-data:
