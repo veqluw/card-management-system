@@ -11,3 +11,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+
+SECRET_ENCRYPTION_PHRASE: ${SECRET_ENCRYPTION_PHRASE}
+JWT_SECRET: ${JWT_SECRET}
+ACCESS_TTL: 900000
+REFRESH_TTL: 604800000
