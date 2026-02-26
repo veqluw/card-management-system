@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-refresh-tokens-table
+      author: postgres
+      changes:
+        - createTable:
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: jti
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+              - column:
+                  name: token_hash
+                  type: VARCHAR(700)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: issued_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: expires_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: revoked
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+
+        - createIndex:
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_user_id
+            columns:
+              - column:
+                  name: user_id
+
+        - createIndex:
+            tableName: refresh_tokens
+            indexName: idx_refresh_tokens_revoked
+            columns:
+              - column:
+                  name: revoked
