@@ -1,3 +1,6 @@
 spring:
   application:
     name: bankcards
+  profiles:
+    active: local
+

@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-roles
+      author: postgres
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: type
+                  value: USER
+
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: type
+                  value: ADMIN
+
+
